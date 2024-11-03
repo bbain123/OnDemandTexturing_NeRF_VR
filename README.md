@@ -37,8 +37,42 @@ With the growing demand for immersive VR experiences, there is a clear need for 
   - Instant NGP by NVIDIA Labs (for NeRF modeling).
   - Tiny Cuda Neural Network, CMake, and Anaconda.
 
-## Dataset Collection
-Our datasets were created using Google Earth videos, allowing for adjustable camera angles and frame counts. This flexibility provided a comprehensive dataset, including 186 images of Middlesex College, processed for 3D model generation.
+## Image Search
+This project uses various datasets to test and refine the VR models. Each dataset is designed to provide different levels of detail and angles to improve model accuracy.
+# Dataset Information
+
+| Dataset             | Size        | Source                                                      | Processing         | Reconstruction Time | Verification Time | Model Information (Triangles/Vertices) | Notes/Concerns                                                                                       |
+|---------------------|-------------|-------------------------------------------------------------|--------------------|---------------------|-------------------|----------------------------------------|------------------------------------------------------------------------------------------------------|
+| **Temple of Time**  | 5 images    | 3 images, plus 2 flipped images for symmetry               | -                  | Instant             | -                 | Triangles: 213                        | Insufficient data for accurate modeling due to limited camera angles.                                |
+| **Greek Temple**    | 47 images   | Captured from Lego modeling software Brick Link Studio      | Already cropped    | -                   | -                 | -                                      | Only 180° captured in COLMAP; symmetry likely impacted the accuracy of camera angle differentiation. |
+| **Middlesex**       | 186 images  | 360° footage captured in Google Earth; snapshots with VLC   | Batch cropping     | 30.6 minutes        | 53.4 minutes      | Triangles: 23,873,472 / Vertices: 11,996,364 | Long processing time; optimizing dataset by focusing on main building reduces noise and time.        |
+
+### Visualizations
+
+<div align="center">
+  <img src="assets/Lego%20Model%201.gif" alt="Temple of Time" width="300px">
+  <img src="assets/Lego%20Model%202.gif" alt="Greek Temple" width="400px">
+  <img src="assets/Middlesexdataset.gif" alt="Middlesex College" width="750px">
+</div>
+
+
+## Image Preprocessing
+Image preprocessing is crucial for the accuracy and quality of NeRF model training and rendering. Preprocessing steps include:
+
+1. **COLMAP Camera Position Calculation**: Using COLMAP to determine the positions of cameras in each dataset, essential for NeRF model accuracy.
+2. **LLFF Conversion**: Leveraging LLFF to convert COLMAP's output into a format readable by the NeRF model, allowing for structured data flow between software.
+
+## Image Processing
+This stage involves creating 3D structures from images using various techniques and tools:
+
+1. **Automatic Reconstruction with Poisson Mesher**: Used to create a high-resolution mesh based on image data.
+2. **Instant-NGP (NVIDIA)**:
+   - Still relies on COLMAP for camera, image, and point data (.txt files).
+   - Provides VR support and mesh exporting in vertex normals and vertex colors.
+   - The Middlesex dataset processing took around 30 minutes, generating a detailed mesh with some noise.
+3. **Mesh Processing and Exporting**:
+   - **Challenges**: High-resolution models with over 5 million triangles introduce significant noise.
+   - **Options for Improvement**: Downsampling reduces detail, so additional software like Blender or Unity shaders might be used to adjust color and refine the mesh.
 
 ## System Architecture
 This project employs a modular system architecture for ease of testing and scalability. Key components include:
