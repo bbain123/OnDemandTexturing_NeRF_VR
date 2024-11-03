@@ -7,10 +7,10 @@ This project introduces a novel approach for generating realistic 3D models from
 With the growing demand for immersive VR experiences, there is a clear need for efficient tools to simplify 3D structure creation. Our project meets this need by using NVIDIA Lab’s Instant Neural Graphics Primitives (NGP) and Google Earth to transform real-world data into VR-compatible assets. This approach accelerates the VR development process, making it easier and faster to create realistic and detailed environments.
 
 ## Key Concepts
-- **Neural Radiance Fields (NeRF)**: A framework for synthesizing views of complex 3D scenes from sparse 2D images.
-- **Neural Graphics Primitives (NGP)**: A generative approach that optimizes rendering performance.
-- **COLMAP**: A photogrammetry tool used to reconstruct 3D structures from 2D images.
-- **Marching Cubes Algorithm**: A technique for constructing a high-resolution 3D surface from volumetric data.
+- **[Neural Radiance Fields (NeRF)](https://www.matthewtancik.com/nerf)**: A framework for synthesizing views of complex 3D scenes from sparse 2D images.
+- **[Neural Graphics Primitives (NGP)](https://github.com/NVlabs/instant-ngp)**: A generative approach that optimizes rendering performance.
+- **[COLMAP](https://colmap.github.io/)**: A photogrammetry tool used to reconstruct 3D structures from 2D images.
+- **[Marching Cubes Algorithm](https://www.youtube.com/watch?v=M3iI2l0ltbE)**: A technique for constructing a high-resolution 3D surface from volumetric data.
 
 ## Development Objectives
 1. **VR Environment Setup**: Design a VR-ready scene as the foundation for testing models.
@@ -74,6 +74,15 @@ This stage involves creating 3D structures from images using various techniques 
    - **Challenges**: High-resolution models with over 5 million triangles introduce significant noise.
    - **Options for Improvement**: Downsampling reduces detail, so additional software like Blender or Unity shaders might be used to adjust color and refine the mesh.
 
+
+<div align="center">
+  <a href="https://youtu.be/SWm8Y-MC5go" title="Watch Demo Video on YouTube">
+    <img src="assets/thumbnail.png" alt="Demo Video" width="500px">
+  </a>
+  <p><strong>Watch Demo Video on YouTube</strong></p>
+</div>
+
+
 ## System Architecture
 This project employs a modular system architecture for ease of testing and scalability. Key components include:
 - **COLMAP** for capturing real-world data points.
@@ -103,7 +112,7 @@ Planned enhancements include:
 Throughout development, our team recognized the importance of iterative design, clear communication, and adaptability. User experience and system flexibility were also critical to successfully achieving our goals.
 
 ## Acknowledgments
-Special thanks to Dr. Brent Davis for his mentorship and guidance, as well as Dr. Katchabaw and Dr. Davis for providing development resources.
+Special thanks to Dr. Brent Davis for his mentorship and guidance, as well as Dr. Katchabaw for providing development resources.
 
 ---
 
