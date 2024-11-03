@@ -62,6 +62,22 @@ Image preprocessing is crucial for the accuracy and quality of NeRF model traini
 1. **COLMAP Camera Position Calculation**: Using COLMAP to determine the positions of cameras in each dataset, essential for NeRF model accuracy.
 2. **LLFF Conversion**: Leveraging LLFF to convert COLMAP's output into a format readable by the NeRF model, allowing for structured data flow between software.
 
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="assets/Colmap.png" alt="Middlesex College Colmap Points" width="300px">
+      <br>
+      <strong>Middlesex College as a series of coloured points in Colmap (Synthetic camera views shown in red)</strong>
+    </td>
+    <td align="center">
+      <img src="assets/Middlesex%20angle.png" alt="Real Image of Middlesex College" width="450px">
+      <br>
+      <strong>Real image of Middlesex College from a similar angle</strong>
+    </td>
+  </tr>
+</table>
+
+
 ## Image Processing
 This stage involves creating 3D structures from images using various techniques and tools:
 
