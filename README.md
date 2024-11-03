@@ -8,7 +8,7 @@ With the growing demand for immersive VR experiences, there is a clear need for 
 
 ## Key Concepts
 - **[Neural Radiance Fields (NeRF)](https://www.matthewtancik.com/nerf)**: A framework for synthesizing views of complex 3D scenes from sparse 2D images.
-- **[Neural Graphics Primitives (NGP)](https://github.com/NVlabs/instant-ngp)**: A generative approach that optimizes rendering performance.
+- **[Neural Graphics Primitives (NGP)](https://nvlabs.github.io/instant-ngp/)**: A generative approach that optimizes rendering performance.
 - **[COLMAP](https://colmap.github.io/)**: A photogrammetry tool used to reconstruct 3D structures from 2D images.
 - **[Marching Cubes Algorithm](https://www.youtube.com/watch?v=M3iI2l0ltbE)**: A technique for constructing a high-resolution 3D surface from volumetric data.
 
@@ -88,6 +88,33 @@ This project employs a modular system architecture for ease of testing and scala
 - **COLMAP** for capturing real-world data points.
 - **Instant NGP** for NeRF-based model training.
 - **Custom GUI** for exporting models and interacting with scene data.
+<div align="center">
+  <img src="assets/ComponentInterace.png" alt="Component Interface" width="500px">
+</div>
+
+## Project Trajectory
+#### [OG NeRF](https://github.com/bmild/nerf)
+The project began with the original NeRF (Neural Radiance Fields) model, first developed in 2020. While the original NeRF demonstrated the effectiveness of volumetric rendering, it had significant limitations in terms of processing time:
+- **Training Time**: 5–8 hours over 30 epochs
+- **Testing Time**: 20–30 minutes per scene
+
+Given this lengthy processing time, we sought faster alternatives to integrate into a VR application, ultimately aiming for a solution that could run on a VR headset.
+
+#### [NeRF Implementation by Kwea](https://github.com/kwea123/nerf_pl)
+The first modification was to switch to an implementation of NeRF by Kwea, which uses PyTorch. This was chosen for:
+- **Compatibility**: PyTorch makes integration with Unity easier, facilitating VR headset deployment.
+- **Performance**: This PyTorch implementation is somewhat faster than the original NeRF, though it still required several hours to complete training.
+
+#### [Transition to Instant-NGP (PyTorch Implementation)](https://github.com/kwea123/ngp_pl)
+We then shifted to Kwea’s implementation of **Instant-NGP** in PyTorch, which theoretically reduces training time to around 5 seconds. However, this implementation faced significant challenges:
+- **Dependency Issues**: The model relied heavily on a deprecated import only available in CUDA 11.7.
+- **Compatibility Requirements**: The project required CUDA 11.8 for compatibility with **tiny CUDA NN**, another essential tool for this implementation.
+
+Due to these compatibility and dependency constraints, we ultimately decided to transition to the original **Instant-NGP by NVIDIA**.
+
+#### [Final Solution: Original Instant-NGP by NVIDIA](https://github.com/NVlabs/instant-ngp)
+The original NVIDIA implementation provided the performance improvements we needed without the dependency and compatibility issues encountered in previous versions. This shift allowed us to reach near-instant training times and meet the project’s VR application requirements effectively.
+
 
 ## Impact and Limitations
 ### Impact
@@ -113,6 +140,20 @@ Throughout development, our team recognized the importance of iterative design, 
 
 ## Acknowledgments
 Special thanks to Dr. Brent Davis for his mentorship and guidance, as well as Dr. Katchabaw for providing development resources.
+
+Research Papers:
+Muller, T., & Evans, A. (2022, July). Instant Neural Graphics Primitives with a Multiresolution Hash Encoding. NVlabs. Retrieved March 30, 2024, from https://nvlabs.github.io/instant-ngp/assets/mueller2022instant.pdf
+
+Github Repositories:
+- https://github.com/NVlabs/tiny-cuda-nn
+- https://github.com/Fyusion/LLFF
+- https://github.com/NVlabs/instant-ngp
+- https://github.com/bmild/nerf
+- https://github.com/colmap/colmap
+
+Websites:
+Schoenberger, J (2023). Colmap Tutorial: Structure-to-Motion. Sphinx. Retrieved March 30, 
+2024, from https://colmap.github.io/tutorial.html#structure-from-motion
 
 ---
 
